@@ -23,6 +23,13 @@ def manage_files(file_name, command):
     elif command == 'rm':
         return 'File deleted!'
 
+def insert_to_file(*args):
+    path = 'files/' + file_name
+    with open(path, 'a') as file:
+        for line in content:
+            file.write(line)
+    return 'Insert done!'
+
 opts = {"1":"create file", "2": "list files", "3":"insert to file", "4":"delete file", "5":"exit"}
 while True:
     message = 'This is the default message'
@@ -35,13 +42,22 @@ while True:
         quit()
     elif select == "1":
         file_name = input('Insert the file name>> ')
-        #message = create_file(file_name)
         message = manage_files(file_name, 'touch')
     elif select == "2":
         files, message = list_files()
         print(files.decode())
     elif select == "3":
-        print("insert to file")
+        files = list_files()
+        print(files[0].decode())
+        file_name = input('Insert the file name>> ')
+        content = []
+        print('Insert the content of the file PRESS ENTER WHEN FINISHED')
+        while True:
+            con = input()
+            if con == '':
+                break
+            content.append(con)
+        message = insert_to_file(file_name, content)
     elif select == "4":
         files, message = list_files()
         print(files.decode())
