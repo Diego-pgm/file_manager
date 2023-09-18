@@ -22,21 +22,28 @@ def manage_files(file_name, command):
     elif command == 'rm':
         return 'File deleted!'
 
-def insert_to_file(*args):
+def insert_to_file(file_name, content=[]):
     path = 'files/' + file_name
     for line in content:
         with open(path, 'a') as file:
             file.write(line)
     return 'Insert done!'
 
-opts = {"1":"create file", "2": "list files", "3":"insert to file", "4":"delete file", "5":"exit"}
+def read_file(file_name):
+    path = 'files/' + file_name
+    with open(path) as file:
+        print(file.read())
+    return 'Interesting, right?!'
+
+
+opts = {"1":"create file", "2": "list files", "3":"insert to file", "4":"read file", "5":"delete file", "6":"exit"}
 while True:
     message = 'This is the default message'
     os.system('clear')
     menu = cust_menu(opts)
     print(menu)
     select = input("Select>> ")
-    if select == "5" or "exit":
+    if select == "6":
         print('bye bye')
         quit()
     elif select == "1":
@@ -59,6 +66,11 @@ while True:
             content.append('\n')
         message = insert_to_file(file_name, content)
     elif select == "4":
+        files, message = list_files()
+        print(files.decode())
+        file_name = input('Insert the file name>> ')
+        message = read_file(file_name)
+    elif select == "5":
         files, message = list_files()
         print(files.decode())
         file_name = input('Insert the file name>> ')
