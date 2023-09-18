@@ -1,7 +1,8 @@
 """A program to update files"""
 import os
+import subprocess
 
-def cust_menu(*args, **kwargs):
+def cust_menu(opts):
     hor = '#dr' * 10
     u = '#dr'
     header = '{} file updater {}\n'.format(hor,hor)
@@ -11,8 +12,12 @@ def cust_menu(*args, **kwargs):
     menu = header + body
     return menu
 
+def create_file(file_name):
+    subprocess.call(['touch', file_name])
+    return 'File created!'
 
 opts = {"1":"create file", "2":"insert to file", "3":"delete file", "4":"exit"}
+message = 'This is the default message'
 while True:
     os.system('clear')
     menu = cust_menu(opts)
@@ -22,15 +27,14 @@ while True:
         print('bye bye')
         quit()
     elif select == "1":
-        print("create file")
-        input()
+        file_name = input('Insert the file name>> ')
+        message = create_file(file_name)
     elif select == "2":
         print("insert to file")
-        input()
     elif select == "3":
         print("delete file")
-        input()
     else:
         print("not an option")
-        input()
+    print(message)
+    input()
 
