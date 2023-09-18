@@ -11,7 +11,6 @@ def cust_menu(opts):
     menu = header + body
     return menu
 
-
 def list_files():
     return subprocess.check_output(['ls','files']), 'let there be files!'
 
@@ -25,8 +24,8 @@ def manage_files(file_name, command):
 
 def insert_to_file(*args):
     path = 'files/' + file_name
-    with open(path, 'a') as file:
-        for line in content:
+    for line in content:
+        with open(path, 'a') as file:
             file.write(line)
     return 'Insert done!'
 
@@ -37,7 +36,7 @@ while True:
     menu = cust_menu(opts)
     print(menu)
     select = input("Select>> ")
-    if select == "5":
+    if select == "5" or "exit":
         print('bye bye')
         quit()
     elif select == "1":
@@ -50,13 +49,14 @@ while True:
         files = list_files()
         print(files[0].decode())
         file_name = input('Insert the file name>> ')
-        content = []
         print('Insert the content of the file PRESS ENTER WHEN FINISHED')
+        content = []
         while True:
             con = input()
             if con == '':
                 break
             content.append(con)
+            content.append('\n')
         message = insert_to_file(file_name, content)
     elif select == "4":
         files, message = list_files()
