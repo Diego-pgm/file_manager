@@ -39,10 +39,12 @@ while True:
         message = manage_files(file_name, 'touch')
     elif select == "2":
         files, message = list_files()
-        print(files.decode().split())
+        print(files.decode())
     elif select == "3":
         print("insert to file")
     elif select == "4":
+        files, message = list_files()
+        print(files.decode())
         file_name = input('Insert the file name>> ')
         message = manage_files(file_name, 'rm')
     else:
