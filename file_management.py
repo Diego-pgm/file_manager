@@ -35,6 +35,10 @@ def read_file(file_name):
         print(file.read())
     return 'Interesting, right?!'
 
+def get_file_name():
+    file_name = input('Insert the file name>> ')
+    return file_name
+
 
 opts = {"1":"create file", "2": "list files", "3":"insert to file", "4":"read file", "5":"delete file", "6":"exit"}
 while True:
@@ -47,7 +51,7 @@ while True:
         print('bye bye')
         quit()
     elif select == "1":
-        file_name = input('Insert the file name>> ')
+        file_name = get_file_name()
         message = manage_files(file_name, 'touch')
     elif select == "2":
         files, message = list_files()
@@ -55,7 +59,7 @@ while True:
     elif select == "3":
         files = list_files()
         print(files[0].decode())
-        file_name = input('Insert the file name>> ')
+        file_name = get_file_name()
         print('Insert the content of the file PRESS ENTER WHEN FINISHED')
         content = []
         while True:
@@ -68,12 +72,12 @@ while True:
     elif select == "4":
         files, message = list_files()
         print(files.decode())
-        file_name = input('Insert the file name>> ')
+        file_name = get_file_name()
         message = read_file(file_name)
     elif select == "5":
         files, message = list_files()
         print(files.decode())
-        file_name = input('Insert the file name>> ')
+        file_name = get_file_name()
         message = manage_files(file_name, 'rm')
     else:
         print("not an option")
